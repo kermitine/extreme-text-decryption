@@ -3,7 +3,7 @@ import enchant
 # Create a dictionary object for English (US)
 d = enchant.Dict('en_US')
 
-version = str(0.2)
+version = str(0.3)
 print('Decryptor V' + version)
 
 text_input = input(str('\n' + 'Enter text for decryption:' + ' \n'))
