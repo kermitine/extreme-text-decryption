@@ -3,7 +3,7 @@ import time
 # Create a dictionary object for English (US)
 d = enchant.Dict('en_US')
 
-version = str(1.2)
+version = str(1.3)
 
 print('''                                                                                                       
                                                     ###%%%#*                                           
