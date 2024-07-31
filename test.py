@@ -3,7 +3,7 @@ import time
 # Create a dictionary object for English (US)
 d = enchant.Dict('en_US')
 
-version = str(1)
+version = str(1.1)
 
 print('''                                                                                                       
                                                     ###%%%#*                                           
@@ -71,6 +71,7 @@ nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 def decryptor(word):
     word_split = []
     pop_list = []
+    joined_word = ''.join(word)
     l = 1
     original = ''
     for x in word: #
@@ -89,32 +90,32 @@ def decryptor(word):
     for y in range(2):
         word_split.pop()
     if word_split[len(word_split)-1] == 'y': # considers the word originally as a vowel
-        print('Processing vowel word!')
+        print('Processing', joined_word)
         word_split.pop()
         word = "".join(word_split)
         print(word_split)
-        print(word + ' is a real word.')
+        print("'" + word + "'" + ' is a recognized word.' + '\n')
         return word
     else:
         while True:
             if l == 4:
-                print('Word failed to decrypt')
+                print("'" + joined_word + "'" ' failed to decrypt' + '\n')
                 return('error')
             rearLetters = len(word_split) - l
             cutSplit = word_split[:rearLetters]
             moveLetters = word_split[rearLetters:]
-            print('Processing consonant word!')
+            print('Processing', joined_word)
             print(word_split)
-            print(cutSplit)
             print(moveLetters)
+            print(cutSplit)
             extended_list = moveLetters + cutSplit
             fullWord = "".join(extended_list)
             print(fullWord )
             if d.check(fullWord):
-                print(fullWord, 'is a real word.' + '\n')
+                print("'" + fullWord + "'" + ' is a recognized word.' + '\n')
                 return fullWord
             else:
-                print(fullWord, "is not a real word." + '\n')
+                print("'" + fullWord + "'" ' is not a recognized word.' + '\n')
                 l += 1
 
 
@@ -127,6 +128,7 @@ def decryptor(word):
 
 
 def sentence(text_input):
+    global final_sentence
     final_sentence = []
     sentence_initial = text_input.split()
 
@@ -138,6 +140,10 @@ def sentence(text_input):
 
 def loopStart(text_input):
     print('\n' + '\n' + '\n' + '\n' + 'Decrypted Result:' + '\n' + sentence(text_input) + '\n' + '\n')
+    for x in final_sentence:
+        if x == 'error':
+            print('Errors detected. Check log for anything verification could have missed.' + '\n')
+            break
     exitCode = input(str('\n' + 'Enter t to translate another sentence. Enter any other key to exit.' + '\n'))
     return exitCode
 
