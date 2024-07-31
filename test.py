@@ -9,8 +9,7 @@ text_input = input(str('\n' + 'Enter text for decryption:' + ' \n'))
 
 def decryptor(word):
     word_split = []
-    word = ''
-
+    # ayrikyay
     for x in word:
         word_split.append(x)
     for y in range(2):
@@ -33,10 +32,11 @@ def decryptor(word):
 def sentence(text_input):
     final_sentence = []
     sentence_initial = text_input.split()
-    print(sentence_initial)
+
     for x in sentence_initial:
         final_sentence.append(decryptor(x))
     print(final_sentence)
+
 
 
 sentence(text_input)
