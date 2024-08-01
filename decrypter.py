@@ -13,7 +13,6 @@ print('Powered by PyEnchant')
 
 text_input = input(str('\n' + 'Enter text for decryption:' + ' \n'))
 
-
 def capitalization_processing(final_sentence, full_stop_punc, sentence):
     final_sentence[0] = final_sentence[0].capitalize()  # Capitalizes very first character of first word
     if sentence == True:
@@ -25,7 +24,6 @@ def capitalization_processing(final_sentence, full_stop_punc, sentence):
     else:
         return final_sentence
     # -----------------------
-
 
 
 def consonant_processing(char_list, joined_word, punc_list, end_consonants):
@@ -57,7 +55,6 @@ def consonant_processing(char_list, joined_word, punc_list, end_consonants):
         else:
             print("'" + full_word + "'" ' is not a recognized word.' + '\n')
             end_consonants += 1
-
 
 
 def vowel_processing(char_list, joined_word, end_consonants, punc_list):
@@ -100,10 +97,12 @@ def punctuation_filter(char_list):
 
 
 def decrypter(word):
+    # variable initialization
     word_split = []
     end_consonants = 1
     joined_word = ''.join(word)
-
+    
+    # delay between each word process
     time.sleep(gap_time)
 
     for x in word:  # splits word into list containing each individual character
@@ -112,21 +111,19 @@ def decrypter(word):
         word_split.append(x)
 
     word_split = casing_filter(word_split)  # renders entire string lowercase
-
     word_split, punc_list = punctuation_filter(word_split) # Punctuation extraction and filtering
 
     for y in range(2):  # remove final 'ay' from word
         word_split.pop()
     
     full_word, vowel_state = vowel_processing(word_split, joined_word, end_consonants, punc_list)
-    print(full_word)
+
     if vowel_state == True:
         return full_word
     else:
         full_word = consonant_processing(word_split, joined_word, punc_list, end_consonants)
         return full_word
             
-
 
 def sentence(text_input):   # separates sentence into words and runs each through decrypter()
     global final_sentence
@@ -143,10 +140,8 @@ def sentence(text_input):   # separates sentence into words and runs each throug
             break
         word_count += 1
 
-        
     final_sentence = capitalization_processing(final_sentence, full_stop_punc, sentence)
 
-    print(final_sentence)
     for x in final_sentence:
         word_count += 1
         if word_count >= 2:
@@ -154,7 +149,6 @@ def sentence(text_input):   # separates sentence into words and runs each throug
             break
 
     joined_sentence = " ".join(final_sentence)
-
     return joined_sentence
 
 
@@ -179,6 +173,5 @@ while True:
         print('Program Terminating...')
         time.sleep(1.5)
         break
-# ------------------------
 
 
