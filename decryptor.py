@@ -66,6 +66,7 @@ print('Powered by PyEnchant')
 text_input = input(str('\n' + 'Enter text for decryption:' + ' \n'))
 punctuation = ['!', '?', '.', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '#', '/', ':', ';',
                     '<', '=', '>', '"', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~']
+full_stop_punc = punctuation[:3]
 nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 
 
@@ -151,10 +152,11 @@ def sentence(text_input):
     # Capitalization sequence
     final_sentence[0] = final_sentence[0].capitalize()  # Capitalizes very first character of first word
     for z in range(1, len(final_sentence)):
-        for currentChar in final_sentence[z-1]:
-            if currentChar in punctuation:
+        for currentChar in final_sentence[z-1]: # cycles through every character of every word
+            if currentChar in full_stop_punc:  # if a full-stop punctuation is detected, capitalize the next word
                 final_sentence[z] = final_sentence[z].capitalize()
                 pass
+    # -----------------------
 
 
     joined_sentence = " ".join(final_sentence)
