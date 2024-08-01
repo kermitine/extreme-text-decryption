@@ -3,7 +3,7 @@ import time
 # Create a dictionary object for English (US)
 d = enchant.Dict('en_US')
 
-version = str('1.4.4')
+version = str('1.4.5')
 
 print('''                                                                                                       
                                                     ###%%%#*                                           
@@ -58,7 +58,7 @@ print(''' __                             .__   __   .__
      \/     \/               \/                     \/      \/ ''')
 
 
-print('Decryptor V' + version)
+print('Decrypter V' + version)
 print('Powered by PyEnchant')
 
 text_input = input(str('\n' + 'Enter text for decryption:' + ' \n'))
@@ -68,12 +68,14 @@ full_stop_punc = punctuation[:3]
 nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 
 
-def decryptor(word):
+def decrypter(word):
+
     word_split = []
     punc_list = []
     fail_count = 1
     joined_word = ''.join(word)
     end_consonants = 1
+    time.sleep(0.07)
     for x in word:
         if x in nums:   # instantly returns if number
             return word
@@ -132,22 +134,12 @@ def decryptor(word):
                 fail_count += 1
 
 
-
-
-
-
-
-
-
-
-def sentence(text_input):
+def sentence(text_input):   # separates sentence into words and runs each through decrypter()
     global final_sentence
     final_sentence = []
     sentence_initial = text_input.split()
 
-    for x in sentence_initial:
-        final_sentence.append(decryptor(x))
-        time.sleep(0.05)
+    final_sentence = [decrypter(x) for x in sentence_initial]
 
     # Capitalization sequence
     final_sentence[0] = final_sentence[0].capitalize()  # Capitalizes very first character of first word
@@ -173,7 +165,8 @@ def loopStart(text_input):
 
 
 # Continuous code loop
-exit_code = str(loopStart(text_input))  # calls loopStart() which calls all other functions. loopstart() returns input_code
+
+exit_code = str(loopStart(text_input))
 
 while True:
     if exit_code in ['t', 'T']:
