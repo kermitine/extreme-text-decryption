@@ -63,7 +63,7 @@ def decrypter(word):
         while True:
             if end_consonants == 5:
                 print("'" + joined_word + "'" ' failed to decrypt' + '\n')
-                return 'error'
+                return '|decryption_failure|'
             rear_letters = len(word_split) - end_consonants
             cut_split = word_split[:rear_letters]
             move_letters = word_split[rear_letters:]
@@ -109,7 +109,7 @@ def sentence(text_input):   # separates sentence into words and runs each throug
 def loopStart(text_input):
     print('\n' + '\n' + '\n' + '\n' + 'Decrypted Result:' + '\n' + sentence(text_input) + '\n' + '\n')
     for x in final_sentence:
-        if x in ['error', 'Error']:
+        if x in ['decryption_failure', 'Decryption_failure']:
             print('Errors detected. Check log for anything verification could have missed.' + '\n')
             break
     input_code = input(str('\n' + 'Enter t to translate another sentence. Enter any other key to exit.' + '\n'))
