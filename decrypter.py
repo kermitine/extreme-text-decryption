@@ -62,14 +62,16 @@ print('Decrypter V' + version)
 print('Powered by PyEnchant')
 
 text_input = input(str('\n' + 'Enter text for decryption:' + ' \n'))
-punctuation = ['!', '?', '.', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '#', '/', ':', ';',
-                    '<', '=', '>', '"', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~']
+punctuation = ['!', '?', '.', ',', ':', ';', '$', '%', '&', "'", '(', ')', '*', '+', '-', '#', '/',
+               '<', '=', '>', '"', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~']
 full_stop_punc = punctuation[:3]
+end_punc = punctuation[:6]
+else_punc = punctuation[7:]
 nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 
 
 def decrypter(word):
-
+    print(else_punc)
     word_split = []
     punc_list = []
     fail_count = 1
@@ -88,7 +90,7 @@ def decrypter(word):
 
     # Punctuation extraction
     for x in range(len(word_split)):
-        if word_split[x] in punctuation:
+        if word_split[x] in end_punc:
             print('Punctuation detected, sorting')
             punc_list.append(word_split[x])
             word_split.pop(x)
