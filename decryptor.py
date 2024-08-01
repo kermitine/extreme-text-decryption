@@ -3,7 +3,7 @@ import time
 # Create a dictionary object for English (US)
 d = enchant.Dict('en_US')
 
-version = str('1.4.1')
+version = str('1.4.2')
 
 print('''                                                                                                       
                                                     ###%%%#*                                           
@@ -105,7 +105,7 @@ def decryptor(word):
         return word
     else:
         while True:
-            if l == 4:
+            if l == 5:
                 print("'" + joined_word + "'" ' failed to decrypt' + '\n')
                 return('error')
             rearLetters = len(word_split) - l
@@ -146,7 +146,7 @@ def sentence(text_input):
 
     for x in sentence_initial:
         final_sentence.append(decryptor(x))
-        time.sleep(1.5)
+        time.sleep(0.05)
     print(final_sentence[0])
 
     # Capitalization sequence
