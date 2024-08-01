@@ -13,18 +13,6 @@ print('Powered by PyEnchant')
 
 text_input = input(str('\n' + 'Enter text for decryption:' + ' \n'))
 
-def capitalization_processing(final_sentence, full_stop_punc, sentence):
-    final_sentence[0] = final_sentence[0].capitalize()  # Capitalizes very first character of first word
-    if sentence == True:
-        for z in range(1, len(final_sentence)):
-            for currentChar in final_sentence[z-1]:
-                if currentChar in full_stop_punc:  # if a full-stop punctuation is detected, capitalize the next word
-                    final_sentence[z] = final_sentence[z].capitalize()
-            return final_sentence
-    else:
-        return final_sentence
-    # -----------------------
-
 
 def consonant_processing(char_list, joined_word, punc_list, end_consonants):
     rear_letters = []
@@ -33,44 +21,53 @@ def consonant_processing(char_list, joined_word, punc_list, end_consonants):
     extended_list = []
     full_word = ''
     while True:
-        if end_consonants == 5:
-            print("'" + joined_word + "'" ' failed to decrypt' + '\n')
-            return '|decryption_failure|'
-        rear_letters = len(char_list) - end_consonants
-        cut_split = char_list[:rear_letters]
-        move_letters = char_list[rear_letters:]
-        print('Processing', joined_word + '_' + str(end_consonants))
-        print(char_list)
-        print(move_letters)
-        print(cut_split)
-        extended_list = move_letters + cut_split
-        full_word = "".join(extended_list)
-        print(full_word)
-        if d.check(full_word):
-            print("'" + full_word + "'" + ' is a recognized word.' + '\n')
-            if punc_list:   # reassembles punctuation, and returns word
-                extended_list = extended_list + punc_list
-                full_word = "".join(extended_list)
-            return full_word
-        else:
-            print("'" + full_word + "'" ' is not a recognized word.' + '\n')
-            end_consonants += 1
+        try:
+            if end_consonants == 5:
+                print("'" + joined_word + "'" ' failed to decrypt' + '\n')
+                return '|decryption_failure|'
+            rear_letters = len(char_list) - end_consonants
+            cut_split = char_list[:rear_letters]
+            move_letters = char_list[rear_letters:]
+            print('Processing', joined_word + '_' + str(end_consonants))
+            print(char_list)
+            print(move_letters)
+            print(cut_split)
+            extended_list = move_letters + cut_split
+            full_word = "".join(extended_list)
+            print(full_word)
+            if d.check(full_word):
+                print("'" + full_word + "'" + ' is a recognized word.' + '\n')
+                if punc_list:   # reassembles punctuation, and returns word
+                    extended_list = extended_list + punc_list
+                    full_word = "".join(extended_list)
+                return full_word
+            else:
+                print("'" + full_word + "'" ' is not a recognized word.' + '\n')
+                end_consonants += 1
+        except:
+            print('An error occured. Are you sure you entered ciphertext? Program closing...')
+            time.sleep(2.5)
 
 
 def vowel_processing(char_list, joined_word, end_consonants, punc_list):
     vowel_state = False
     word = ''
-    if char_list[len(char_list)-1] == 'y':    # the word is a vowel according to pig latin rules
-        print('Processing', joined_word + '_' + str(end_consonants))
-        char_list.pop()
-        word = "".join(char_list)
-        print(char_list)
-        print("'" + word + "'" + ' is a recognized word.' + '\n')
-        vowel_state = True
-        if punc_list:   # reassembles punctuation, and returns word
-            char_list = char_list + punc_list
+    try:
+        if char_list[len(char_list)-1] == 'y':    # the word is a vowel according to pig latin rules
+            print('Processing', joined_word + '_' + str(end_consonants))
+            char_list.pop()
             word = "".join(char_list)
-    return word, vowel_state
+            print(char_list)
+            print("'" + word + "'" + ' is a recognized word.' + '\n')
+            vowel_state = True
+            if punc_list:   # reassembles punctuation, and returns word
+                char_list = char_list + punc_list
+                word = "".join(char_list)
+        return word, vowel_state
+    except:
+        print('An error occured. Are you sure you entered ciphertext? Program closing...')
+        vowel_state = False
+        time.sleep(2.5)
 
 
 def casing_filter(char_list):
@@ -96,6 +93,18 @@ def punctuation_filter(char_list):
     return char_list, punc_list
 
 
+def capitalization_processing(final_sentence, full_stop_punc, sentence):
+    final_sentence[0] = final_sentence[0].capitalize()  # Capitalizes very first character of first word
+    if sentence == True:
+        for z in range(1, len(final_sentence)):
+            for currentChar in final_sentence[z-1]:
+                if currentChar in full_stop_punc:  # if a full-stop punctuation is detected, capitalize the next word
+                    final_sentence[z] = final_sentence[z].capitalize()
+            return final_sentence
+    else:
+        return final_sentence
+    
+    
 def decrypter(word):
     # variable initialization
     word_split = []
@@ -128,25 +137,16 @@ def decrypter(word):
 def sentence(text_input):   # separates sentence into words and runs each through decrypter()
     global final_sentence
     final_sentence = []
-    word_count = 0
     sentence = False
     sentence_initial = text_input.split()
     for x in sentence_initial:
         final_sentence.append(decrypter(x))
     
-    for x in final_sentence:
-        if word_count >= 2:
-            sentence = True
-            break
-        word_count += 1
+    if len(final_sentence) >= 2:
+        sentence = True
 
     final_sentence = capitalization_processing(final_sentence, full_stop_punc, sentence)
 
-    for x in final_sentence:
-        word_count += 1
-        if word_count >= 2:
-            sentence = True
-            break
 
     joined_sentence = " ".join(final_sentence)
     return joined_sentence
