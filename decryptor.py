@@ -146,6 +146,16 @@ def sentence(text_input):
     for x in sentence_initial:
         final_sentence.append(decryptor(x))
         time.sleep(1.5)
+    print(final_sentence[0])
+
+    # Capitalization sequence
+    final_sentence[0] = final_sentence[0].capitalize()  # Capitalizes very first character of first word
+    for z in range(1, len(final_sentence)):
+        for currentChar in final_sentence[z-1]:
+            if currentChar in punctuation:
+                final_sentence[z] = final_sentence[z].capitalize()
+                pass
+
 
     joined_sentence = " ".join(final_sentence)
     return joined_sentence
