@@ -1,110 +1,61 @@
 import enchant
 import time
+from files.vars import *
+from files.ascii import *
 # Create a dictionary object for English (US)
 d = enchant.Dict('en_US')
 
-version = str('1.4.5')
-
-print('''                                                                                                       
-                                                    ###%%%#*                                           
-                                                  #%%%%%%%%%%*                                         
-                                               +%%%%%%%%%%%%%%%#=                                      
-                                            =#%%%%%%%%%%%%%%%%%%%%*                                    
-                                          *%%%%%%%%%%%%%%%%%%%%%%@%%*                                  
-                                      =*#%%%%%%%%%%%%%%%%%%%%%@@%%@@%#                                 
-                                    *%%%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@%                                
-      -----                       #%%%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@+                              
-    -=++*#+=-                  +#@@@@@@@@@@@@@@@@@@%%%%%@@@@@@@@@@@@@@@@@*                             
-    -+#+:=#*=-               *%@@@@@@@@@@@@@@@@@@@@@@@@%%%%%%@%%@@@@@@@@@@*                            
-    -=*#=:-##+-            *@@@@@@@@@%%%%%%%%%%%@@@@@@@@@@%%%%%@@@@@@@@@@@@#                           
-      =*#=:-*#+-          @@@@@@@@%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@@%                          
-       =*#+::*#+-        #@@@@@@@%%%#####%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@%*                        
-        =*#+::*#+-      *@@@@@@@%%#########%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@%+                       
-         -+#+::+#*=     %@@@@@@%%##*****#####%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@+                      
-          -+#*::+#*=   #@@@@@@@%#******#####%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@%                      
-           -+#*-:=#*= +%@@@@@@@%#*****######%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@+                      
-            -+#*-:=#*=#@@@@@@@@@##**######%%%%%%%%%@@@@%%%%%%@@@@@@@@@@@@@@@@@@@+                      
-             -=##-:-###%@@@@@@@%#@@@%%%%@@@@@@%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@*                     
-              -=*#=:-###%@@@@@@%#**####%%%%%%%%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@%-                    
-               -=*#=:-###%@@@@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@#                    
-                -=*#+::*##%@@@@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@*                   
-                  =##+::*##%@@@@@@@@@%%%%%%%%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@%-                  
-                   ###*::+###@@@@@@@@@@%%%%%%%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@%                  
-                  +@%##*::+###@@@@@@@@@@%%%%%%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@*                 
-                  =@@%##*-:=###@@@@@@@@@%%%%%%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@%+                
-                  *@@@%###-:=###%@@@@@@@@%%%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@#                
-                  %@@@@%###-:-###%@@@@@@@@%%%%%%%%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@%                
-                  %@@@@@%###=:-###%@@@@@@@@@@@@%%%%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#               
-                  @@@@@@@%###=:-###%@@@@@@@@@@@@%%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-              
-                  %@@@@@@@@###+::*##%@@@@@@@@@@%%%%%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#              
-                  %@@@@@@@@@###+::*##%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*             
-                  *@@@@@@@@@@%##*::+###@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@=            
-                  +@@@@@@@@@@@%##*::+###@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%*             
-                  =@@@@@@@@@@@@%###-:=###@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@%              
-                   #@@@@@@@@@@@@%###-.=###@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*             
-                   #@@@@@@@@@@@@@%###=-+*#%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#             
-                    ##@@@@@@@@@@@@@##*%#**@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#            
-                        +@@@@@@@@@@@%%#%*##@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#            
-                       *@@@@@@@@@@@@@@@%%@*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#           
-
-
-                                                                                                       ''')
-
-print(''' __                             .__   __   .__                 
-|  | __  ____  _______   _____  |__|_/  |_ |__|  ____    ____  
-|  |/ /_/ __ \ \_  __ \ /     \ |  |\   __\|  | /    \ _/ __ \ 
-|    < \  ___/  |  | \/|  Y Y  \|  | |  |  |  ||   |  \\  ___/ 
-|__|_ \ \___  > |__|   |__|_|  /|__| |__|  |__||___|  / \___  >
-     \/     \/               \/                     \/      \/ ''')
-
+print(ascii_kermitine_portrait)
+print(ascii_kermitine)
 
 print('Decrypter V' + version)
 print('Powered by PyEnchant')
 
 text_input = input(str('\n' + 'Enter text for decryption:' + ' \n'))
-punctuation = ['!', '?', '.', ',', ':', ';', '$', '%', '&', "'", '(', ')', '*', '+', '-', '#', '/',
-               '<', '=', '>', '"', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~']
-full_stop_punc = punctuation[:3]
-end_punc = punctuation[:6]
-else_punc = punctuation[7:]
-nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 
 
 def decrypter(word):
-    print(else_punc)
     word_split = []
     punc_list = []
+    pop_list = []
     fail_count = 1
     joined_word = ''.join(word)
     end_consonants = 1
-    time.sleep(0.07)
-    for x in word:
-        if x in nums:   # instantly returns if number
+    time.sleep(gap_time)
+
+    for x in word:  # splits word into list containing all characters
+        if x in nums:   # instantly returns if it's a number
             return word
         word_split.append(x)
 
-    # Lowercase sequence
+    # renders all characters lowercase----------------------------------------------------------------------------------
     for x in range(len(word_split)):
         word_split[x] = word_split[x].lower()
-    # ------------------
+    # ------------------------------------------------------------------------------------------------------------------
 
-    # Punctuation extraction
+    # Punctuation extraction and purging----------------------------------------------------------------------------
     for x in range(len(word_split)):
         if word_split[x] in end_punc:
             print('Punctuation detected, sorting')
             punc_list.append(word_split[x])
+            pop_list.append(x)
+        elif word_split[x] in else_punc:
+            print('Purging unneeded punctuation')
+            pop_list.append(x)
+    if pop_list:
+        for x in sorted(pop_list, reverse=True):
             word_split.pop(x)
-    # -------------------
+    # ------------------------------------------------------------------------------------------------------------------
 
-    for y in range(2):
+    for y in range(2):  # remove final 'ay' from word
         word_split.pop()
-    if word_split[len(word_split)-1] == 'y':    # considers the word as a vowel
+    if word_split[len(word_split)-1] == 'y':    # the word is a vowel according to pig latin rules
         print('Processing', joined_word + '_' + str(fail_count))
         word_split.pop()
         word = "".join(word_split)
         print(word_split)
         print("'" + word + "'" + ' is a recognized word.' + '\n')
-        if punc_list:
+        if punc_list:   # reassembles punctuation, and returns word
             word_split = word_split + punc_list
             word = "".join(word_split)
         return word
@@ -125,8 +76,7 @@ def decrypter(word):
             print(full_word)
             if d.check(full_word):
                 print("'" + full_word + "'" + ' is a recognized word.' + '\n')
-                if punc_list:
-                    print('Punctuation detected, sorting')
+                if punc_list:   # reassembles punctuation, and returns word
                     extended_list = extended_list + punc_list
                     full_word = "".join(extended_list)
                 return full_word
@@ -159,7 +109,7 @@ def sentence(text_input):   # separates sentence into words and runs each throug
 def loopStart(text_input):
     print('\n' + '\n' + '\n' + '\n' + 'Decrypted Result:' + '\n' + sentence(text_input) + '\n' + '\n')
     for x in final_sentence:
-        if x == 'error':
+        if x in ['error', 'Error']:
             print('Errors detected. Check log for anything verification could have missed.' + '\n')
             break
     input_code = input(str('\n' + 'Enter t to translate another sentence. Enter any other key to exit.' + '\n'))
