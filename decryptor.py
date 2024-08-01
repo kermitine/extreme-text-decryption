@@ -3,7 +3,7 @@ import time
 # Create a dictionary object for English (US)
 d = enchant.Dict('en_US')
 
-version = str('1.4.2')
+version = str('1.4.3')
 
 print('''                                                                                                       
                                                     ###%%%#*                                           
@@ -72,12 +72,10 @@ nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 
 def decryptor(word):
     word_split = []
-    pop_list = []
     puncList = []
     failcount = 1
     joined_word = ''.join(word)
     l = 1
-    original = ''
     for x in word: #
         if x in nums: # instantly returns if number
             return word
@@ -147,20 +145,19 @@ def sentence(text_input):
     for x in sentence_initial:
         final_sentence.append(decryptor(x))
         time.sleep(0.05)
-    print(final_sentence[0])
 
     # Capitalization sequence
     final_sentence[0] = final_sentence[0].capitalize()  # Capitalizes very first character of first word
     for z in range(1, len(final_sentence)):
-        for currentChar in final_sentence[z-1]: # cycles through every character of every word
+        for currentChar in final_sentence[z-1]:
             if currentChar in full_stop_punc:  # if a full-stop punctuation is detected, capitalize the next word
                 final_sentence[z] = final_sentence[z].capitalize()
-                pass
     # -----------------------
 
 
     joined_sentence = " ".join(final_sentence)
     return joined_sentence
+
 
 def loopStart(text_input):
     print('\n' + '\n' + '\n' + '\n' + 'Decrypted Result:' + '\n' + sentence(text_input) + '\n' + '\n')
@@ -172,24 +169,18 @@ def loopStart(text_input):
     return exitCode
 
 
-
-
-
-
-exitCode1 = str(loopStart(text_input))
-
+# Continuous code loop
+exitCode1 = str(loopStart(text_input))  # calls loopStart() which calls all other functions. loopstart() returns exitcode
 
 while True:
     if exitCode1 in ['t', 'T']:
         text_input = input(str('\n' + 'Enter text for decryption:' + ' \n'))
         exitCode1 = loopStart(text_input)
-    elif exitCode1 is None:
-        print('Program Terminating...')
-        time.sleep(1.5)
-        break
     else:
         print('Program Terminating...')
         time.sleep(1.5)
         break
+
+# ------------------------
 
 
