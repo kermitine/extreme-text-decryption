@@ -58,8 +58,6 @@ print(''' __                             .__   __   .__
      \/     \/               \/                     \/      \/ ''')
 
 
-
-
 print('Decryptor V' + version)
 print('Powered by PyEnchant')
 
@@ -76,22 +74,27 @@ def decryptor(word):
     fail_count = 1
     joined_word = ''.join(word)
     end_consonants = 1
-    for x in word: #
-        if x in nums: # instantly returns if number
+    for x in word:
+        if x in nums:   # instantly returns if number
             return word
         word_split.append(x)
+
+    # Lowercase sequence
     for x in range(len(word_split)):
-        word_split[x] = word_split[x].lower() # converts all strings to lowercase
+        word_split[x] = word_split[x].lower()
+    # ------------------
+
+    # Punctuation extraction
     for x in range(len(word_split)):
         if word_split[x] in punctuation:
             print('Punctuation detected, sorting')
             punc_list.append(word_split[x])
             word_split.pop(x)
-
+    # -------------------
 
     for y in range(2):
         word_split.pop()
-    if word_split[len(word_split)-1] == 'y': # considers the word originally as a vowel
+    if word_split[len(word_split)-1] == 'y':    # considers the word as a vowel
         print('Processing', joined_word + '_' + str(fail_count))
         word_split.pop()
         word = "".join(word_split)
@@ -105,7 +108,7 @@ def decryptor(word):
         while True:
             if end_consonants == 5:
                 print("'" + joined_word + "'" ' failed to decrypt' + '\n')
-                return('error')
+                return 'error'
             rear_letters = len(word_split) - end_consonants
             cut_split = word_split[:rear_letters]
             move_letters = word_split[rear_letters:]
