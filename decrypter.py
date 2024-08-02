@@ -14,7 +14,7 @@ print('Powered by PyEnchant')
 text_input = input(str('\n' + 'Enter text for decryption:' + ' \n'))
 
 
-def consonant_processing(char_list, joined_word, punc_list, end_consonants):
+def consonant_processing(char_list, joined_word, punc_list, end_consonants):    # checks and processes consonants
     rear_letters = []
     cut_split = []
     move_letters = []
@@ -49,7 +49,7 @@ def consonant_processing(char_list, joined_word, punc_list, end_consonants):
             time.sleep(2.5)
 
 
-def vowel_processing(char_list, joined_word, end_consonants, punc_list):
+def vowel_processing(char_list, joined_word, end_consonants, punc_list):    # checks and processes vowels
     vowel_state = False
     word = ''
     try:
@@ -70,32 +70,32 @@ def vowel_processing(char_list, joined_word, end_consonants, punc_list):
         time.sleep(2.5)
 
 
-def casing_filter(char_list):
+def casing_filter(char_list):   # renders all characters in a word lowercase
     for x in range(len(char_list)):
         char_list[x] = char_list[x].lower()
     return char_list
 
 
 def punctuation_filter(char_list):
-    punc_list = []  # resets for each word
-    pop_list = []   # resets for each word
+    punc_list = [] 
+    pop_list = []   
     for x in range(len(char_list)):
-        if char_list[x] in end_punc:
+        if char_list[x] in end_punc:    # removes important punctuation, which is added back later.
             print('Punctuation detected, sorting')
             punc_list.append(char_list[x])
             pop_list.append(x)
         elif char_list[x] in else_punc:
-            print('Purging unneeded punctuation')
+            print('Purging unneeded punctuation')   # purges unnecessary punctuation
             pop_list.append(x)
     if pop_list:
-        for x in sorted(pop_list, reverse=True):
+        for x in sorted(pop_list, reverse=True):    # prevents indexes from getting changed mid-loop
             char_list.pop(x)
     return char_list, punc_list
 
 
 def capitalization_processing(final_sentence, full_stop_punc, sentence):
     final_sentence[0] = final_sentence[0].capitalize()  # Capitalizes very first character of first word
-    if sentence == True:
+    if sentence == True:    # prevents indexing crash
         for z in range(1, len(final_sentence)):
             for currentChar in final_sentence[z-1]:
                 if currentChar in full_stop_punc:  # if a full-stop punctuation is detected, capitalize the next word
@@ -104,15 +104,14 @@ def capitalization_processing(final_sentence, full_stop_punc, sentence):
     else:
         return final_sentence
     
-    
+
 def decrypter(word):
     # variable initialization
     word_split = []
     end_consonants = 1
     joined_word = ''.join(word)
     
-    # delay between each word process
-    time.sleep(gap_time)
+    time.sleep(gap_time)    # time between each word decryption. adjustable in files/vars.py
 
     for x in word:  # splits word into list containing each individual character
         if x in nums:   
@@ -120,14 +119,14 @@ def decrypter(word):
         word_split.append(x)
 
     word_split = casing_filter(word_split)  # renders entire string lowercase
-    word_split, punc_list = punctuation_filter(word_split) # Punctuation extraction and filtering
+    word_split, punc_list = punctuation_filter(word_split)  # Punctuation extraction and filtering
 
     for y in range(2):  # remove final 'ay' from word
         word_split.pop()
     
     full_word, vowel_state = vowel_processing(word_split, joined_word, end_consonants, punc_list)
 
-    if vowel_state == True:
+    if vowel_state == True: # if it's a vowel, accept word. else, run through additional processing
         return full_word
     else:
         full_word = consonant_processing(word_split, joined_word, punc_list, end_consonants)
@@ -142,7 +141,7 @@ def sentence(text_input):   # separates sentence into words and runs each throug
     for x in sentence_initial:
         final_sentence.append(decrypter(x))
     
-    if len(final_sentence) >= 2:
+    if len(final_sentence) >= 2:    # prevents indexing crash if it's a single word
         sentence = True
 
     final_sentence = capitalization_processing(final_sentence, full_stop_punc, sentence)
@@ -152,7 +151,7 @@ def sentence(text_input):   # separates sentence into words and runs each throug
     return joined_sentence
 
 
-def loopStart(text_input):
+def loop_start(text_input):  # starts entire decryption sequence, then takes user input which is passed on to exit_code
     print('\n' + '\n' + '\n' + '\n' + 'Decrypted Result:' + '\n' + sentence(text_input) + '\n' + '\n')
     for x in final_sentence:
         if x in ['|decryption_failure|', '|Decryption_failure|']:
@@ -163,14 +162,14 @@ def loopStart(text_input):
 
 
 # Continuous code loop
-exit_code = str(loopStart(text_input))
+exit_code = str(loop_start(text_input))
 
 while True:
-    if exit_code in ['t', 'T']:
+    if exit_code in ['t', 'T']: # restarts loop
         text_input = input(str('\n' + 'Enter text for decryption:' + ' \n'))
-        exit_code = loopStart(text_input)
+        exit_code = loop_start(text_input)
     else:
-        print('Program Terminating...')
+        print('Program Terminating...') # breaks loop, closes program
         time.sleep(1.5)
         break
 
