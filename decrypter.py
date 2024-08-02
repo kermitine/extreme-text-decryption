@@ -155,7 +155,7 @@ def sentence(text_input):   # separates sentence into words and runs each throug
 def loopStart(text_input):
     print('\n' + '\n' + '\n' + '\n' + 'Decrypted Result:' + '\n' + sentence(text_input) + '\n' + '\n')
     for x in final_sentence:
-        if x in ['decryption_failure', 'Decryption_failure']:
+        if x in ['|decryption_failure|', '|Decryption_failure|']:
             print('Errors detected. Check log for anything verification could have missed.' + '\n')
             break
     input_code = input(str('\n' + 'Enter t to translate another sentence. Enter any other key to exit.' + '\n'))
