@@ -7,4 +7,4 @@ end_punc = punctuation[:6]
 else_punc = punctuation[6:]
 version = '1.5.6'
 # WARNING: Do not modify with the variables above ----------------------------------------------------------------------
-gap_time = 0.35  # affects time (in seconds) between each word process. default: 0.7
+gap_time = 0.35  # affects time (in seconds) between each word process. default: 0.35
