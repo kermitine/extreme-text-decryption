@@ -1,3 +1,7 @@
+DEPRECATED - ALL FURTHER UPDATES will be to the Glick suite (https://github.com/kermitine/Glick)
+
+
+
 apart of kermitine's "extreme" encryption suite
 
 decrypts text from extreme-text-encryption
