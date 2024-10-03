@@ -2,9 +2,9 @@ DEPRECATED - ALL FURTHER UPDATES will be to the Glick suite (https://github.com/
 
 
 
-apart of kermitine's "extreme" encryption suite
+apart of kermitine's "xtreem" encryption suite
 
-decrypts text from extreme-text-encryption
+decrypts text from xtreem-text-encryption
 
 uses PyEnchant for word comprehension. Prone to errors due to the method, but relatively reliable
 
